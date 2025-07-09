@@ -5,5 +5,5 @@ export type Orders = {
 export type Invoice = {
   orders: Orders[];
   customer: string;
-  dueDate?: Date;
+  dueDate: Date;
 };

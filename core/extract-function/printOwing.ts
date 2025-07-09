@@ -1,27 +1,17 @@
 import { Invoice } from "./types";
+import {
+  calculateOutstanding,
+  printBanner,
+  printDetails,
+  recordDueDate,
+} from "./utils";
 
 function printOwing(invoice: Invoice) {
-  let outstanding = 0;
+  const outstanding = calculateOutstanding(invoice);
 
-  console.log("***********************");
-  console.log("**** Customer Owes ****");
-  console.log("***********************");
-
-  for (const o of invoice.orders) {
-    outstanding += o.amount;
-  }
-
-  const today = new Date();
-
-  invoice.dueDate = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() + 30
-  );
-
-  console.log(`name: ${invoice.customer}`);
-  console.log(`amount: ${outstanding}`);
-  console.log(`due: ${invoice.dueDate.toLocaleDateString()}`);
+  printBanner();
+  recordDueDate(invoice);
+  printDetails(invoice, outstanding);
 }
 
 export default printOwing;
